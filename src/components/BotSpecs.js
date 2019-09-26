@@ -1,7 +1,7 @@
 import React from "react";
 
 const BotSpecs = props => {
-  let { bot } = props;
+  let { bot, addBot, clicked, isClicked, removeBot } = props;
 
   let botType;
 
@@ -17,6 +17,19 @@ const BotSpecs = props => {
       break;
     default:
       botType = <div />;
+  }
+
+  const returnToMain = () => {
+    return(
+      <div>
+        <BotSpecs
+          bot={bot}
+          addBot={this.addBot}
+          clicked={this.state.clicked}
+          isClicked={this.isClicked}
+        />      
+      </div>
+    )
   }
 
   return (
@@ -60,19 +73,13 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
-              }
+              onClick={() => isClicked()}
             >
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
+              onClick={() => removeBot ? removeBot(bot) : addBot(bot)  }  
             >
               Enlist
             </button>
